@@ -5,4 +5,7 @@ __author__ = 'Gabriel'
 100 MB file size
 '''
 
-print("Hello world")
+#First projet : classifier de test
+#Utiliser classificateur bayesien
+#Bag_of_words
+#Implementer aussi un Laplace smoothing
