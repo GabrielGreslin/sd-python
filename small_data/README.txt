@@ -1,1 +1,0 @@
-Data file have to be smaller than 100MB each. (Git requirement)
