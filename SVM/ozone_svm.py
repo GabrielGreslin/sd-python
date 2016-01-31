@@ -53,8 +53,7 @@ def builtY(data):
     Y = np.zeros(samples_number,dtype=bool)
 
     for i,x in enumerate(data):
-        f = lambda x:x>threshold
-        Y[i] = f(x[1])
+        Y[i] = x[1]>threshold
 
     return Y
 
