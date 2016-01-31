@@ -3,6 +3,10 @@
 Created on Wed Jan 20 12:13:19 2016
 
 @author: Abderrahmen
+
+Add features:
+- Number of word in e-mail
+- ...
 """
 
 # Import
@@ -12,6 +16,12 @@ from numpy import genfromtxt
 
 # Import spam data
 ##################
+
+# Additional features
+# 1 - number of words in the e-mail
+# 2 - most frequent word
+an = 2
+
 
 # Load word stats
 word_stats = genfromtxt('data\Spam\emails-train-features.txt', delimiter=' ')
@@ -46,25 +56,33 @@ print(nb_words)
 
 # Build an input for the machine
 for i in range(0,nb_doc):
-    doc_stats[i] = [0]*nb_words
+    doc_stats[i] = [0]*(nb_words+an)
 
+nb_mfw = 0
 for stat in word_stats_a:
     doc_id = int(stat[0]-1)
     word_id = int(stat[1]-1)
     nb_word = int(stat[2]-1)
     doc_stats[doc_id][word_id] = nb_word
-    
+    doc_stats[doc_id][nb_words+1-1] += nb_word # Nb words in e-mail
+    if nb_word > nb_mfw :
+        doc_stats[doc_id][nb_words+2-1] = word_id # Most frequent word
+        nb_mfw = nb_word
+
 # Build an input for the machine test
 for i in range(0,nb_doc_test):
-    doc_stats_test[i] = [0]*nb_words
+    doc_stats_test[i] = [0]*(nb_words+an)
 
+nb_mfw = 0
 for stat in word_stats_a_test:
     doc_id = int(stat[0]-1)
     word_id = int(stat[1]-1)
     nb_word = int(stat[2]-1)
     doc_stats_test[doc_id][word_id] = nb_word
-
-
+    doc_stats_test[doc_id][nb_words+1-1] += nb_word # Nb words in e-mail
+    if nb_word > nb_mfw :
+        doc_stats_test[doc_id][nb_words+2-1] = word_id # Most frequent word
+        nb_mfw = nb_word
 
 # Generate model
 gnb = GaussianNB()
@@ -77,7 +95,7 @@ y_pred = model.predict(doc_stats_test)
 print('y_pred:')
 print(y_pred)
 
-# Print score
+# Print Score
 print('Score:')
 s = model.score(doc_stats_test,labels_test)
 print(s)
