@@ -1,0 +1,32 @@
+-------------------------------------------------
+spam-naive-bayes.py
+Abderrahmen
+
+Classic features
+
+Score: 92.3%
+
+-------------------------------------------------
+spam-naive-bayes-2.py
+Abderrahmen
+
+Classic features
++ Number of words in e-mail
+
+Score: 93 % (+0.7%)
+
+-------------------------------------------------
+spam-naive-bayes-3.py
+Abderrahmen
+
+Classic features
++ Number of words in e-mail
++ Id f the most frequent word
+
+Score: 93 %
+=> No improvement.
+
+-------------------------------------------------
+spam-naive-bayes-Multinomial.py
+Gabriel
+Score: ???
