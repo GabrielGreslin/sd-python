@@ -32,7 +32,6 @@ def fromWordStatsToX(word_stats):
 
     for x in word_stats:
         X[(x[0]-1),(x[1]-1)]=x[2]
-        X[(x[0]-1),(x[1])]+=x[2]
 
     return X
 
