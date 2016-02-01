@@ -42,6 +42,8 @@ def builtXndY(data):
         X[i,:] = (l[:-1]-8)/16 # normalization
         Y[i,0]= l[-1]
 
+
+
     return (X,Y)
 
 (X,Y)= builtXndY(data)
