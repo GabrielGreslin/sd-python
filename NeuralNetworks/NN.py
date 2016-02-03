@@ -1,5 +1,8 @@
 __author__ = 'Gabriel'
-
+'''
+Create a neural network then train in for the character recognition
+Use pybrain library
+'''
 from numpy import genfromtxt
 import numpy as np
 import opticalCharacterManipulation
@@ -16,12 +19,12 @@ from pybrain.supervised.trainers import BackpropTrainer
 import matplotlib.pyplot as plt
 import time
 
-start = time.time()
+
 data = genfromtxt("..\data\Optical character recognition\optdigits.tra", delimiter=',', dtype=None,skip_header=0)
 print(data.shape)
 datatest = genfromtxt("..\data\Optical character recognition\optdigits.tes", delimiter=',', dtype=None,skip_header=0)
 
-
+start = time.time()
 #Last row is the label (64 features + 1 label)
 
 '''
@@ -91,9 +94,14 @@ for i in range(20):
           "  test error: %5.2f%%" % tstresult)
 
 
-plt.plot(x_errors[0,:],errors[0,:],'g',x_errors[0,:],errors[1,:],'b')
-plt.show()
+#plt.plot(x_errors[0,:],errors[0,:],'g',x_errors[0,:],errors[1,:],'b')
+#plt.show()
 
 #epoch:   20   train error:  4.34%   test error:  6.84%
+#Time elapsed :84.42
+
+#Without normalization of the input values
+#epoch:   20   train error:  6.70%   test error: 10.46%
+#Time elapsed :80.95
 end = time.time()
 print("Time elapsed :"+str(end-start))
