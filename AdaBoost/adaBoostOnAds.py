@@ -76,7 +76,7 @@ pred = classifier.predict(X_test)
 if(y_test[0] == True):
     t_names = ["Add","Not add"]
 else:
-    t_names = ["Less Poluted","Ozone Day"]
+    t_names = ["Not add","Add"]
 
 
 cr = classification_report(y_test,pred,target_names=t_names)

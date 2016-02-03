@@ -2,6 +2,7 @@ __author__ = 'Gabriel'
 
 from numpy import genfromtxt
 import numpy as np
+import opticalCharacterManipulation
 
 #from sklearn.neural_network import MLPClassifier # not implemented in sci learn version 0.17
 from pybrain.structure import FeedForwardNetwork
@@ -13,8 +14,9 @@ from pybrain.utilities           import percentError
 from pybrain.supervised.trainers import BackpropTrainer
 
 import matplotlib.pyplot as plt
+import time
 
-
+start = time.time()
 data = genfromtxt("..\data\Optical character recognition\optdigits.tra", delimiter=',', dtype=None,skip_header=0)
 print(data.shape)
 datatest = genfromtxt("..\data\Optical character recognition\optdigits.tes", delimiter=',', dtype=None,skip_header=0)
@@ -29,25 +31,8 @@ Then second hidden layer
 Then result
 '''
 
-'''
-Load the data in a X and Y matrice, normalized
-'''
-def builtXndY(data):
-    samples_number = len(data)
-    feature_number = 64
-    X = np.zeros((samples_number,feature_number),dtype=float)
-    Y = np.zeros((samples_number,1),dtype=float)
-
-    for i,l in enumerate(data):
-        X[i,:] = (l[:-1]-8)/16 # normalization
-        Y[i,0]= l[-1]
-
-
-
-    return (X,Y)
-
-(X,Y)= builtXndY(data)
-(Xtest,Ytest)= builtXndY(datatest)
+(X,Y)= opticalCharacterManipulation.builtXndY(data)
+(Xtest,Ytest)= opticalCharacterManipulation.builtXndY(datatest)
 
 # Generate the neural network model
 nn = FeedForwardNetwork()
@@ -108,3 +93,7 @@ for i in range(20):
 
 plt.plot(x_errors[0,:],errors[0,:],'g',x_errors[0,:],errors[1,:],'b')
 plt.show()
+
+#epoch:   20   train error:  4.34%   test error:  6.84%
+end = time.time()
+print("Time elapsed :"+str(end-start))
