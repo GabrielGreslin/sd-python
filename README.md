@@ -1,4 +1,8 @@
 # sd-python
+'''
+1GB Github repository maximum size
+100 MB file size
+'''
 Commit python code for the sd projects
 
 https://www.dropbox.com/home/Rapport-supervized-learning
@@ -9,7 +13,7 @@ https://www.dropbox.com/home/Rapport-supervized-learning
 Plan d'action :
 Faire function visualisation image
 
-Faire benchmark brut sans feature extraction, trouver le meilleur score = point de départ
+[En cours Gabriel] Faire benchmark brut sans feature extraction, trouver le meilleur score = point de départ
 
 1) Feature Engineering - Abderrahmen
 Séparation espace:

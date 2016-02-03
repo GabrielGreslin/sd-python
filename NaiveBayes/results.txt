@@ -29,4 +29,5 @@ Score: 93 %
 -------------------------------------------------
 spam-naive-bayes-Multinomial.py
 Gabriel
-Score: ???
+#Score:0.889259877574
+#Time elapsed : 0.5560309886932373

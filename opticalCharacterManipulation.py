@@ -29,7 +29,7 @@ def loadTrainAndTestRawData():
     data = np.genfromtxt(filenameTrain, delimiter=',', dtype=None,skip_header=0)
     print("Data Train Shape :" + str(data.shape))
     datatest = np.genfromtxt(filenameTest, delimiter=',', dtype=None,skip_header=0)
-    print("Data Test Shape :" + str(data.shape))
+    print("Data Test Shape :" + str(datatest.shape))
 
     (X,Y)= builtXndY(data)
     (X_test,Y_test)= builtXndY(datatest)

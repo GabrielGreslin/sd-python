@@ -84,3 +84,5 @@ print(cr)
 
 ac = confusion_matrix(y_test, pred, labels=[True,False])
 print(ac)
+
+print("Score : "+str(classifier.score(X_test,y_test)))

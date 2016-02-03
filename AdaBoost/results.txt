@@ -1,0 +1,6 @@
+AdaBoost
+
+Raw input, no feature
+
+#Score 0.565943238731
+#Elapsed time : 0.5740330219268799s

@@ -1,0 +1,6 @@
+Results for SVM test on opt digit recognition
+
+
+Basic SVM with no feature, C=2,  kernel = 'rbf')
+# Score :0.58653311074
+# Elapsed time : 3.7342140674591064

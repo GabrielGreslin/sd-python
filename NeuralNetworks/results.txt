@@ -1,0 +1,11 @@
+Neural Network
+
+# Input layer 64, 1 Hidden Layer of 50 nodes with sigmoid,
+#Without normalization of the input values - 20 epochs
+#test error:  6.84%
+#Time elapsed :84.42
+
+# Input layer 64, 1 Hidden Layer of 50 nodes with sigmoid,
+# Normalization of the input values - 20 epochs
+#test error: 10.46%
+#Time elapsed :80.95
