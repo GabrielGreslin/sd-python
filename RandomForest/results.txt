@@ -1,0 +1,6 @@
+Optical digits classification with random forest
+
+
+#Not particular features, default classifier parameter
+Score : 0.95325542571
+Elapsed time : 0.08600497245788574
