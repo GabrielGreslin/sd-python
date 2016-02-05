@@ -13,7 +13,7 @@ https://www.dropbox.com/home/Rapport-supervized-learning
 Plan d'action :
 Faire function visualisation image
 
-[En cours Gabriel] Faire benchmark brut sans feature extraction, trouver le meilleur score = point de départ
+[Done] Faire benchmark brut sans feature extraction, trouver le meilleur score = point de départ
 
 1) Feature Engineering - Abderrahmen
 Séparation espace:
@@ -25,11 +25,11 @@ détection de bord
 trouver features invariantes par rotation/translation
 
 2) test different algos - analyse de l'utilité des features
-[FAIT] Naive Bayes simple - Abderrahmen
-[FAIT] Naive Bayes Multinomial - Gabriel
-[FAIT] Neural Network - Gabriel
-Ada boost - Gabriel
-SVM - Gabriel
-Random forest - Gabriel
+Naive Bayes simple -
+Naive Bayes Multinomial -
+Neural Network -
+Ada boost -
+SVM -
+Random forest -
 
 3) Conclusion + rapport rédaction
