@@ -58,24 +58,24 @@ Split input in 75% training set and 25% testing set
 
 return X,Y,X_test,Y_test
 '''
-def loadTrainAndTestFeaturesData(*listFeatFunction):
+def loadTrainAndTestFeaturesData(keepRawFeature,*listFeatFunction):
     (X,Y,X_test,Y_test)= loadTrainAndTestRawData()
 
     N_F = getNumberArguments(*listFeatFunction)
 
     print("Total Number of new features : " + str(N_F))
-    #Extend X
-    (U,V) = X.shape
-    X_feat = np.zeros((U,V+N_F))
-    X_feat[:,:-N_F] = X
+    #Extend X and X_test
 
-    #Extend X_test
-    (U_test,V) = X_test.shape
-    X_test_feat = np.zeros((U_test,V+N_F))
-    X_test_feat[:,:-N_F] = X_test
+    X_feat = extendArray(X,keepRawFeature,N_F)
+    X_test_feat = extendArray(X_test,keepRawFeature,N_F)
 
-    X_feat = appliedFeatures(X_feat,*listFeatFunction)
-    X_test_feat = appliedFeatures(X_test_feat,*listFeatFunction)
+    if keepRawFeature:
+        column = 64
+    else:
+        column = 0
+
+    X_feat = appliedFeatures(X,X_feat,column,*listFeatFunction)
+    X_test_feat = appliedFeatures(X_test,X_test_feat,column,*listFeatFunction)
 
     return  (X_feat,Y,X_test_feat,Y_test)
 
@@ -83,15 +83,15 @@ def loadTrainAndTestFeaturesData(*listFeatFunction):
 Fill up the features
 Assume the matrice X as the good size
 '''
-def appliedFeatures(X,*list_features):
-        for lineNb,l in enumerate(X):
-            column=64
-            for f in list_features:
-                addFeat = f(l[0:64])
-                nbFeat = len(addFeat)
-                X[lineNb,column:(column+nbFeat)] = addFeat
-                column += nbFeat
-        return X
+def appliedFeatures(RawFeatures,whereToAdd,columnStart,*list_features):
+    for lineNb,l in enumerate(RawFeatures):
+        column = columnStart
+        for f in list_features:
+            addFeat = f(l[0:64])
+            nbFeat = len(addFeat)
+            whereToAdd[lineNb,column:(column+nbFeat)] = addFeat
+            column+= nbFeat
+    return whereToAdd
 
 '''
 Compute the number of features creadted by the list of features function
@@ -108,4 +108,23 @@ def getNumberArguments(*args):
     return totalLength
 
 
+'''
+Extend an array of numberOfColumn, keep the original value or not
+'''
 
+def extendArray(array, keepValues, numberOfColumn):
+
+    (U,V) = array.shape
+
+    if keepValues:
+        array_ext = np.zeros((U,V+numberOfColumn))
+        array_ext[:,:-numberOfColumn] = array
+    else:
+        array_ext = np.zeros((U,numberOfColumn))
+
+    return array_ext;
+
+f = lambda x:[sum(x),10]
+X,Y,X_test,Y_test = loadTrainAndTestFeaturesData(True,f)
+
+print(X)
