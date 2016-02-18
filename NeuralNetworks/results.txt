@@ -9,3 +9,47 @@ Neural Network
 #Without normalization of the input values - 20 epochs
 #test error: 10.46%
 #Time elapsed :80.95
+
+# Convolutionnal neural network
+#
+# With a convolution of size 2*2, one hidden sigmoid layer of 50
+# train error:  2.83%   test error:  5.79%
+# Time elapsed :356.28737807273865
+
+# With a convolution of size 2*2 + bias, one hidden sigmoid layer of 50
+# train error: 2.25%   test error: 4.56%
+# Time elapsed :356.65039896965027
+
+# With a convolution of size 2*2 + bias, + second covolution with the hidden layers on the output 16 neurons
+# train error: 11.14%   test error: 13.58%
+# Time elapsed :537.6237459182739
+
+#Tried to force the input parameters of neuron to be the same for different neuron with different input
+# one layer convolution of 2, one of 4 and one of 6 + bias, one hidden sigmoid layer of 50
+need 15 more epochs
+epoch:   20   train error:  4.37%   test error:  7.62%
+Time elapsed :998.1554491519928
+
+#Tried to force the input parameters of neuron to be the same for different neuron with different input
+# three layer convolution of 2 + bias, one hidden sigmoid layer of 50
+need 15 more epochs
+epoch:   20   train error:  4.37%   test error:  7.62%
+Time elapsed :998.1554491519928
+epoch:   34   train error:  3.77%   test error:  6.23%
+epoch:   35   train error:  3.92%   test error:  7.29%
+Time elapsed :2262.972321987152
+
+#Tried to force the input parameters of neuron to be the same for different neuron with different input
+# 6 layers convolution of 3 + bias, 6 subsampling + bias, one hidden sigmoid layer full connected of 54, full connected gaussian Layer 10
+# Coefs : 54,216,2916,540
+epoch:    1   train error: 89.85%   test error: 89.09%
+epoch:    2   train error: 90.06%   test error: 90.15%
+epoch:    3   train error: 90.06%   test error: 90.15%
+epoch:    4   train error: 90.06%   test error: 90.15% -> stopped
+
+Same issue with 10 neuron on the sigmoid hidden layers
+Same issue With an output layer Sigmoid and not gaussian
+
+#Tried to force the input parameters of neuron to be the same for different neuron with different input
+# 6 layers convolution of 3 + bias, 6 layers subsampling same param + bias, one hidden sigmoid layer full connected of 10, full connected sigmoid Layer 10
+# Coefs : 54,24,60,100  (compare to 3823 samples)
