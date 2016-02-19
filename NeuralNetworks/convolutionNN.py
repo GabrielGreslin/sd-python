@@ -35,8 +35,8 @@ def createConvolutionnalLayer(neuralnet, inputlayer, sizewindow):
                 inputSlice.append(inputNeurons)
 
             destination = ModuleSlice(convlayer,inSliceFrom=i*nb_of_conv_axis+j,inSliceTo=i*nb_of_conv_axis+j+1)
-            neuralnet.addConnection(FullConnection(biasLayer, destination, name=str(i)+"_"+str(j)+"_Bias"))
 
+            neuralnet.addConnection(FullConnection(biasLayer, destination, name=str(i)+"_"+str(j)+"_Bias"))
             for k,inSl in enumerate(inputSlice):
                 inToconvLayer = FullConnection(inSl, destination, name=str(i)+"_"+str(j)+"_"+str(k))
                 neuralnet.addConnection(inToconvLayer)

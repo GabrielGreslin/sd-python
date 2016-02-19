@@ -1,2 +1,4 @@
 .idea/
 __pycache__/opticalCharacterManipulation.cpython-34.pyc
+__pycache__/features.cpython-34.pyc
+NeuralNetworks/__pycache__/convolutionNN.cpython-34.pyc

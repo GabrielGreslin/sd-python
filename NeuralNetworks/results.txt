@@ -17,6 +17,7 @@ Neural Network
 # Time elapsed :356.28737807273865
 
 # With a convolution of size 2*2 + bias, one hidden sigmoid layer of 50
+(49*5 + 49*5*50 + 50*10 = 30 + 500 + 1500)
 # train error: 2.25%   test error: 4.56%
 # Time elapsed :356.65039896965027
 
@@ -32,6 +33,7 @@ Time elapsed :998.1554491519928
 
 #Tried to force the input parameters of neuron to be the same for different neuron with different input
 # three layer convolution of 2 + bias, one hidden sigmoid layer of 50
+(10*3 + 30*50 + 50*10 = 30 + 500 + 1500)
 need 15 more epochs
 epoch:   20   train error:  4.37%   test error:  7.62%
 Time elapsed :998.1554491519928
@@ -52,4 +54,64 @@ Same issue With an output layer Sigmoid and not gaussian
 
 #Tried to force the input parameters of neuron to be the same for different neuron with different input
 # 6 layers convolution of 3 + bias, 6 layers subsampling same param + bias, one hidden sigmoid layer full connected of 10, full connected sigmoid Layer 10
-# Coefs : 54,24,60,100  (compare to 3823 samples)
+# Coefs : 54,24,60,100  (= 240 //ration >10 compare to 3823 samples)
+epoch:    1   train error: 77.30%   test error: 78.02%
+epoch:    2   train error: 69.19%   test error: 68.34%
+epoch:    3   train error: 64.09%   test error: 64.66%
+epoch:    4   train error: 64.90%   test error: 65.94%
+epoch:    5   train error: 64.16%   test error: 64.61%
+epoch:    6   train error: 61.42%   test error: 60.66%
+epoch:    7   train error: 62.88%   test error: 62.88%
+epoch:    8   train error: 62.10%   test error: 62.99%
+epoch:    9   train error: 60.35%   test error: 61.10%
+epoch:   10   train error: 60.61%   test error: 60.43%
+epoch:   11   train error: 56.74%   test error: 56.54%
+epoch:   12   train error: 51.09%   test error: 51.64%
+epoch:   13   train error: 60.19%   test error: 60.21%
+epoch:   14   train error: 52.11%   test error: 52.14%
+epoch:   15   train error: 58.20%   test error: 59.27%
+epoch:   16   train error: 46.64%   test error: 47.86%
+epoch:   17   train error: 54.02%   test error: 54.15%
+epoch:   18   train error: 49.88%   test error: 50.03%
+epoch:   19   train error: 51.48%   test error: 51.92%
+epoch:   20   train error: 45.36%   test error: 47.02%
+epoch:   21   train error: 47.92%   test error: 49.30%
+epoch:   22   train error: 46.25%   test error: 48.25%
+epoch:   23   train error: 45.96%   test error: 47.02%
+epoch:   24   train error: 47.55%   test error: 48.41%
+epoch:   25   train error: 48.78%   test error: 49.36%
+epoch:   26   train error: 48.86%   test error: 48.53%
+epoch:   27   train error: 44.99%   test error: 46.08%
+epoch:   28   train error: 44.44%   test error: 46.36%
+epoch:   29   train error: 43.06%   test error: 44.52%
+epoch:   30   train error: 42.92%   test error: 44.52%
+epoch:   31   train error: 42.51%   test error: 43.41%
+epoch:   32   train error: 43.68%   test error: 44.57%
+epoch:   33   train error: 43.97%   test error: 44.63%
+epoch:   34   train error: 41.90%   test error: 42.40%
+epoch:   35   train error: 40.70%   test error: 42.40%
+Time elapsed :5482.273111104965
+echec with subsampling
+
+# With a convolution of size 2*2 + bias, one hidden sigmoid layer of 50 again, with Sigmoid at the end, failed !
+(49*5 + 49*5*50 + 50*10 = 30 + 1500 + 500)
+test error: > 10%
+# Time elapsed :356.65039896965027
+
+#100 hidden neuron layer
+# epoch:   61   train error:  2.33%   test error:  4.51%
+
+input -> 50             -\__ Ouput Layer
+input -> conv 49 -> 50  -/
+#epoch:   47   train error:  2.48%   test error:  4.23%
+
+input ->             -\__ 50 -> 10 Ouput Layer
+input -> conv 49 ->  -/
+epoch:   22   train error:  2.33%   test error:  4.34%
+
+input ->             -\__ 60 -> 10 Ouput Layer
+input -> conv 49 ->  -/
+epoch:   31   train error:  2.01%   test error:  4.12%
+epoch:   39   train error:  2.22%   test error:  4.34%
+epoch:   40   train error:  2.14%   test error:  4.67%
+Time elapsed :906.4574239253998
