@@ -52,6 +52,11 @@ epoch:    4   train error: 90.06%   test error: 90.15% -> stopped
 Same issue with 10 neuron on the sigmoid hidden layers
 Same issue With an output layer Sigmoid and not gaussian
 
+# 6 layers convolution of 3 + bias, 6 subsampling same param + bias, one hidden sigmoid layer full connected of 50, Linear Layer 10
+epoch:   97   train error:  6.07%   test error:  9.91%   time : 21032.2 s
+# 12 layers convolution of 3 + bias, 12 subsampling + bias, one hidden sigmoid layer full connected of 50, Linear Layer 10
+
+
 #Tried to force the input parameters of neuron to be the same for different neuron with different input
 # 6 layers convolution of 3 + bias, 6 layers subsampling same param + bias, one hidden sigmoid layer full connected of 10, full connected sigmoid Layer 10
 # Coefs : 54,24,60,100  (= 240 //ration >10 compare to 3823 samples)
@@ -115,3 +120,11 @@ epoch:   31   train error:  2.01%   test error:  4.12%
 epoch:   39   train error:  2.22%   test error:  4.34%
 epoch:   40   train error:  2.14%   test error:  4.67%
 Time elapsed :906.4574239253998
+
+input ->             -\__ 100 -> 10 Ouput Layer
+input -> conv 49 ->  -/
+epoch:   19   train error:  1.96%   test error:  3.84%  time : 1395.7
+
+biai  ->             -\       biai \_
+input ->              -\__ 100 ------> 10 Ouput Layer
+input -> conv 49 ->  -/

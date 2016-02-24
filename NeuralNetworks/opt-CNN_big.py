@@ -4,7 +4,7 @@ from pybrain.structure.moduleslice import ModuleSlice
 import opticalCharacterManipulation
 
 # from sklearn.neural_network import MLPClassifier # not implemented in sci learn version 0.17
-from pybrain.structure import FeedForwardNetwork, BiasUnit
+from pybrain.structure import FeedForwardNetwork
 from pybrain.structure import LinearLayer, SigmoidLayer
 from pybrain.structure import FullConnection
 
@@ -49,43 +49,27 @@ print("Input size : " + str(feature_size) + " features")
 inputLayer = LinearLayer(feature_size, name="Input")
 nn.addInputModule(inputLayer)
 
-convLayer = createConvolutionnalLayer(nn, inputLayer, sizewindow=2)
-convLayer2 = createConvolutionnalLayer(nn, inputLayer, sizewindow=3)
+conv_layers = []
+for i in range(0,12):
+    conv_layers.append(createConvolutionnalSharedWeightLayer(nn, inputLayer, sizewindow=3))
 
-
-#Add biai
-#biaiInput = BiasUnit(name="Biai Input")
-#nn.addModule(biaiInput)
+subSampleLayer = []
+for cvl in conv_layers:
+    subSampleLayer.append(createSubSamplingLayer(nn,cvl,2))
 
 #Second hidden layer
-secondHiddenLayer = SigmoidLayer(100, name="secondHiddenLayer")
+secondHiddenLayer = SigmoidLayer(50, name="secondHiddenLayer")
 nn.addModule(secondHiddenLayer)
 
-
-#topSecond = ModuleSlice(secondHiddenLayer,inSliceFrom=0,inSliceTo=50)
-#bottomSecond = ModuleSlice(secondHiddenLayer,inSliceFrom=50,inSliceTo=100)
-nn.addConnection(FullConnection(inputLayer, secondHiddenLayer, name="input to hidden"))
-nn.addConnection(FullConnection(convLayer, secondHiddenLayer, name="conv1 to hidden"))
-nn.addConnection(FullConnection(convLayer2, secondHiddenLayer, name="conv1 to hidden"))
-#nn.addConnection(FullConnection(biaiInput, secondHiddenLayer, name="biai to hidden"))
-
-
-#thirdHiddenLayer = SigmoidLayer(100, name="ThirdHiddenLayer")
-#nn.addModule(thirdHiddenLayer)
-
-#nn.addConnection(FullConnection(secondHiddenLayer,thirdHiddenLayer,name="Second to third"))
-#Add biai
-#biaiToOuput = BiasUnit(name="biaiToOuput")
-#nn.addModule(biaiToOuput)
+for subS in subSampleLayer:
+    nn.addConnection(FullConnection(subS, secondHiddenLayer, name="sub to hidden"))
 
 # OutputLayer
 classnumber = 10
 outputLayer = LinearLayer(classnumber, name="Ouput")
 nn.addOutputModule(outputLayer)
 
-#nn.addConnection(FullConnection(thirdHiddenLayer, outputLayer, name="hidden2 to out"))
 nn.addConnection(FullConnection(secondHiddenLayer, outputLayer, name="hidden2 to out"))
-#nn.addConnection(FullConnection(biaiToOuput, outputLayer, name="hidden2 to out"))
 
 nn.sortModules()
 
@@ -111,15 +95,23 @@ print(alldata['input'][0], alldata['target'][0], alldata['class'][0])
 trainer = BackpropTrainer(nn, dataset=alldata, learningrate=0.01, momentum=0.1, verbose=False, weightdecay=0.002,
                           batchlearning=False)
 
-numberOfEpoch = 60
+numberOfEpoch = 40
 
 x_errors = np.zeros((1, numberOfEpoch), dtype=int)
 errors = np.zeros((2, numberOfEpoch), dtype=float)
 
-for i in range(numberOfEpoch):
+remainingEpoch = 15
+low = False
+
+while remainingEpoch >0:
     trainer.trainEpochs(1)
     trnresult = percentError(trainer.testOnClassData(), alldata['class'])
     tstresult = percentError(trainer.testOnClassData(dataset=alldatatest), alldatatest['class'])
+
+    if(tstresult < 4.12):
+        low = True
+    if low:
+        remainingEpoch = remainingEpoch -1
 
     x_errors[0, i] = trainer.totalepochs
     errors[0, i] = trnresult
@@ -128,7 +120,7 @@ for i in range(numberOfEpoch):
     print("epoch: %4d" % trainer.totalepochs, \
           "  train error: %5.2f%%" % trnresult, \
           "  test error: %5.2f%%" % tstresult,\
-          " time : %5.1f" % current)
+          "  time : %5.1f s" % current)
 
 end = time.time()
 print("Time elapsed :" + str(end - start))
