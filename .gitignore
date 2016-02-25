@@ -1,2 +1,4 @@
 .idea/
 __pycache__/opticalCharacterManipulation.cpython-34.pyc
+spam-naive-bayes.py
+*.pyc

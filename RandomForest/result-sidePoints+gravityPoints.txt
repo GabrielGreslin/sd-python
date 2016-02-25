@@ -1,0 +1,8 @@
+()
+Data Train Shape :(3823, 65)
+Data Test Shape :(1797, 65)
+sidePoints add 20 new features.
+gravityPoints add 4 new features.
+Total Number of new features : 24
+Score: 94.02 %
+Elapsed time : 33.8999998569

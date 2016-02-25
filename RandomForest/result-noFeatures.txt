@@ -1,0 +1,5 @@
+()
+Data Train Shape :(3823, 65)
+Data Test Shape :(1797, 65)
+Score: 94.3 %
+Elapsed time : 21.6500000954

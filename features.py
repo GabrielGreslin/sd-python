@@ -23,6 +23,13 @@ def sidePoints(x):  # x is an array with the 64 raw input
     e = create_tab(x)
 
     o = []
+
+    gravityCenter = [0, 0]
+    gravityWeight = 0
+
+    gravityCenterWhite = [0, 0]
+    gravityWeightWhite = 0
+
     top = 0
     bottom = 0
     right = 0
@@ -51,7 +58,19 @@ def sidePoints(x):  # x is an array with the 64 raw input
     for i in range(0,8):
         o.extend(e[i])
         for j in range(0,8):
+
             r = e[i][j]
+            rDark = r # r if r > 0 else 0
+            rWhite = 0 if r > 0 else 1
+
+            gravityCenter[0] += rDark * i
+            gravityCenter[1] += rDark * j
+            gravityWeight += rDark
+
+            gravityCenterWhite[0] += rWhite * i
+            gravityCenterWhite[1] += rWhite * j
+            gravityWeightWhite += rWhite
+
             if i < 4:
                 top += r
                 if j < 4:
@@ -81,9 +100,16 @@ def sidePoints(x):  # x is an array with the 64 raw input
             else:
                 right += r
     v = []
-    #av = [top,bottom,left,right,a,b,c,d]
-    #av = [a,b,c,d]
     av = []
+
+    if gravityWeight > 0 :
+        gravityCenter[0] = gravityCenter[0] / gravityWeight
+        gravityCenter[1] = gravityCenter[1] / gravityWeight
+
+    if gravityWeightWhite > 0 :
+        gravityCenterWhite[0] = gravityCenterWhite[0] / gravityWeightWhite
+        gravityCenterWhite[1] = gravityCenterWhite[1] / gravityWeightWhite
+
     if an > 0:
         av += [ai/an,aj/an]
     else:
@@ -101,9 +127,54 @@ def sidePoints(x):  # x is an array with the 64 raw input
     else:
         av += [0,0]
 
+    # av += gravityCenter
+    # av += gravityCenterWhite
     av += [top,bottom,left,right,a,b,c,d]
     av += [a,b,c,d]
 
+
     v += av
+
+    return v
+
+
+def gravityPoints(x):  # x is an array with the 64 raw input
+    assert (len(x) == 64), "Wrong input size"
+
+    e = create_tab(x)
+
+    gravityCenter = [0, 0]
+    gravityWeight = 0
+
+    gravityCenterWhite = [0, 0]
+    gravityWeightWhite = 0
+
+    for i in range(0,8):
+        for j in range(0,8):
+
+            r = e[i][j]
+            rDark = r # r if r > 0 else 0
+            rWhite = 0 if r > 0 else 1
+
+            gravityCenter[0] += rDark * i
+            gravityCenter[1] += rDark * j
+            gravityWeight += rDark
+
+            gravityCenterWhite[0] += rWhite * i
+            gravityCenterWhite[1] += rWhite * j
+            gravityWeightWhite += rWhite
+
+    v = []
+
+    if gravityWeight > 0 :
+        gravityCenter[0] = gravityCenter[0] / gravityWeight
+        gravityCenter[1] = gravityCenter[1] / gravityWeight
+
+    if gravityWeightWhite > 0 :
+        gravityCenterWhite[0] = gravityCenterWhite[0] / gravityWeightWhite
+        gravityCenterWhite[1] = gravityCenterWhite[1] / gravityWeightWhite
+
+    v += gravityCenter
+    v += gravityCenterWhite
 
     return v

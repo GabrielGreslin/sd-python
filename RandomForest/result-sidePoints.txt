@@ -1,0 +1,7 @@
+()
+Data Train Shape :(3823, 65)
+Data Test Shape :(1797, 65)
+sidePoints add 20 new features.
+Total Number of new features : 20
+Score: 94.08 %
+Elapsed time : 30.8170001507
