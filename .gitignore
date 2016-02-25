@@ -2,3 +2,5 @@
 __pycache__/opticalCharacterManipulation.cpython-34.pyc
 spam-naive-bayes.py
 *.pyc
+__pycache__/features.cpython-34.pyc
+NeuralNetworks/__pycache__/convolutionNN.cpython-34.pyc

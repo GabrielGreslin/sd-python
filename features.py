@@ -137,7 +137,6 @@ def sidePoints(x):  # x is an array with the 64 raw input
 
     return v
 
-
 def gravityPoints(x):  # x is an array with the 64 raw input
     assert (len(x) == 64), "Wrong input size"
 
@@ -178,3 +177,46 @@ def gravityPoints(x):  # x is an array with the 64 raw input
     v += gravityCenterWhite
 
     return v
+
+def addBias(x):
+    return [1]
+
+def convolution(x):  # x is an array with the 64 raw input
+    assert (len(x) == 64), "Wrong input size"
+
+    conv_windows_size = 2
+    width = 8
+    height = 8
+
+    windows = []
+
+    for i in range(0,width-conv_windows_size):
+        for j in range(0,height-conv_windows_size):
+
+
+            for k in range(0,conv_windows_size):
+                for l in range(0,conv_windows_size):
+                    windows.append(x[(i+k)*height + (j+l)])
+
+    return windows;  # a list of new features
+
+def convolutionBias(x):
+    assert (len(x) == 64), "Wrong input size"
+
+    conv_windows_size = 2
+    width = 8
+    height = 8
+
+    windows = []
+
+    for i in range(0,width-conv_windows_size):
+        for j in range(0,height-conv_windows_size):
+
+
+            for k in range(0,conv_windows_size):
+                for l in range(0,conv_windows_size):
+                    windows.append(x[(i+k)*height + (j+l)])
+
+            windows.append(1)#add biais
+
+    return windows;  # a list of new features
